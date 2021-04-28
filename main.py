@@ -1,49 +1,79 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
 import time
+import csv
 
+hours = int(time.strftime('%H'))
+
+# Section 1: Title
 st.title('Affective Foretell')
-st.write("What's your name?")
+st.subheader('What is your name?')
+name = st.selectbox(
+    'Select your nickname.',
+    ('--', 'Alex', 'Ben', 'Chris', 'Don', 'Eddie', 'Fem', 'Greta',
+     'Hans', 'Iris', 'Jon'))
+if name != '--':
+    st.write('Hello', name,'!')
 
-st.write("Here's our first attempt at using data to create a table:")
-st.write(pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-}))
-checker = st.checkbox('I am a robot.')
-if st.button('Say hello'):
-    st.write('Why hello there')
-    print(checker)
+# Section 2: Mood
+st.subheader('How are you feeling right now?')
+mood_calm = st.select_slider(' ',
+    ['Very agitated', 'Agitated', 'Somewhat agitated', 'Neutral', 'Somewhat calm', 'Calm', 'Very calm'],
+    value='Very agitated')
+
+mood_awake = st.select_slider(' ',
+    ['Very tired', 'Tired', 'Somewhat tired', 'Neutral', 'Somewhat awake', 'Awake', 'Very awake'],
+    value='Very tired')
+
+mood_content = st.select_slider(' ',
+    ['Very discontent', 'Discontent', 'Somewhat discontent', 'Neutral', 'Somewhat content', 'Content', 'Very content'],
+    value='Very discontent')
+
+mood_energy = st.select_slider(' ',
+    ['Very lack of energy', 'Lack of energy', 'Somewhat lack of energy', 'Neutral', 'Somewhat energized', 'Energized', 'Very Energized'],
+    value='Very lack of energy')
+
+mood_well = st.select_slider(' ',
+    ['Very unwell', 'Unwell', 'Somewhat unwell', 'Neutral', 'Somewhat well', 'Well', 'Very well'],
+    value='Very unwell')
+
+mood_relaxed = st.select_slider(' ',
+    ['Very tense', 'Tense', 'Somewhat tense', 'Neutral', 'Somewhat relaxed', 'Relaxed', 'Very relaxed'],
+    value='Very tense')
+
+moods = [mood_calm, mood_awake, mood_content, mood_energy, mood_well, mood_relaxed]
+# Section 3: Activities
+if hours in range(6, 12):
+    st.subheader('How many hours did you sleep last night?')
+    sleep_time = st.slider(
+        label='',
+        min_value=0.0,
+        max_value=16.0,
+        step=0.5,
+        format='%1f'
+    )
+    food_options = 'food_options'
+    activity_options = 'activity_options'
+elif hours in range(12, 17):
+    st.subheader('What was your last meal?')
+    food_options = st.multiselect(
+        'You can select multiple options.',
+        ['🥩', '🍔', '🍕', '🌭', '🍝', '🍚', '🍞', '🥛',
+         '🥔', '🧀', '🍎', '🍌', '🥗', '🥒', '🍰', '🍪' ])
+    sleep_time = 'sleep_time'
+    activity_options = 'activity_options'
 else:
-    st.write('Goodbye')
+    st.subheader('What were your activities today?')
+    activity_options = st.multiselect(
+        'You can select multiple options.',
+        ['⚽️', '🧘️', '🎹', '🚗', '📱', '🛏', '🛍', '📚', '💻',
+         '🍽', '🍻'])
+    sleep_time = 'sleep_time'
+    food_options = 'food_options'
 
 
-
-
-option = st.sidebar.selectbox(
-    'Which number do you like best?', df['first column'])
-
-st.write('You selected: ', option)
-
-progress_bar = st.progress(0)
-status_text = st.empty()
-chart = st.line_chart(np.random.randn(10, 2))
-
-for i in range(100):
-    # Update progress bar.
-    progress_bar.progress(i + 1)
-
-    new_rows = np.random.randn(10, 2)
-
-    # Update status text.
-    status_text.text(
-        'The latest random number is: %s' % new_rows[-1, 1])
-
-    # Append data to the chart.
-    chart.add_rows(new_rows)
-
-    # Pretend we're doing some computation that takes time.
-    time.sleep(0.1)
-
-status_text.text('Done!')
+if st.button('Submit'):
+    with open('data.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow([name,moods, sleep_time, food_options, activity_options])
+    st.write('Thank you for your submission!')
+    st.balloons()
