@@ -16,31 +16,20 @@ if name != '--':
 
 # Section 2: Mood
 st.subheader('How are you feeling right now?')
-mood_calm = st.select_slider(' ',
-    ['Very agitated', 'Agitated', 'Somewhat agitated', 'Neutral', 'Somewhat calm', 'Calm', 'Very calm'],
-    value='Very agitated')
+mood_NH_PL = st.select_slider(' ',
+    ['Very tense', 'Tense', 'Somewhat tense', 'Neutral', 'Somewhat calm', 'Calm', 'Very calm'],
+    value='Very tense')
 
-mood_awake = st.select_slider(' ',
-    ['Very tired', 'Tired', 'Somewhat tired', 'Neutral', 'Somewhat awake', 'Awake', 'Very awake'],
-    value='Very tired')
-
-mood_content = st.select_slider(' ',
+mood_PM_NM = st.select_slider(' ',
     ['Very discontent', 'Discontent', 'Somewhat discontent', 'Neutral', 'Somewhat content', 'Content', 'Very content'],
     value='Very discontent')
 
-mood_energy = st.select_slider(' ',
-    ['Very lack of energy', 'Lack of energy', 'Somewhat lack of energy', 'Neutral', 'Somewhat energized', 'Energized', 'Very Energized'],
-    value='Very lack of energy')
 
-mood_well = st.select_slider(' ',
-    ['Very unwell', 'Unwell', 'Somewhat unwell', 'Neutral', 'Somewhat well', 'Well', 'Very well'],
-    value='Very unwell')
+mood_PH_NL = st.select_slider(' ',
+    ['Very bored', 'Bored', 'Somewhat bored', 'Neutral', 'Somewhat excited', 'Excited', 'Very excited'],
+    value='Very bored')
 
-mood_relaxed = st.select_slider(' ',
-    ['Very tense', 'Tense', 'Somewhat tense', 'Neutral', 'Somewhat relaxed', 'Relaxed', 'Very relaxed'],
-    value='Very tense')
-
-moods = [mood_calm, mood_awake, mood_content, mood_energy, mood_well, mood_relaxed]
+moods = [mood_NH_PL, mood_PM_NM, mood_PH_NL]
 # Section 3: Activities
 if hours in range(6, 12):
     st.subheader('How many hours did you sleep last night?')
