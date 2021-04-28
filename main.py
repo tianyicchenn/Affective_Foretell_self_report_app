@@ -66,8 +66,8 @@ if st.button('Submit'):
         st.write('Please select your nickname.')
     else:
         st.write('Thank you for your submission!')
-        with open('data.csv', 'a') as file:
-            writer = csv.writer('data.csv')
+        with open('.data.csv', 'a') as file:
+            writer = csv.writer(file)
             writer.writerow(user_input)
         st.balloons()
 
