@@ -12,7 +12,7 @@ name = st.selectbox(
     ('--', 'Alex', 'Ben', 'Chris', 'Don', 'Eddie', 'Fem', 'Greta',
      'Hans', 'Iris', 'Jon'))
 if name != '--':
-    st.write('Helloooo', name,'!')
+    st.write('Hello', name,'!')
 
 # Section 2: Mood
 st.subheader('How are you feeling right now?')
@@ -23,7 +23,6 @@ mood_NH_PL = st.select_slider(' ',
 mood_PM_NM = st.select_slider(' ',
     ['Very discontent', 'Discontent', 'Somewhat discontent', 'Neutral', 'Somewhat content', 'Content', 'Very content'],
     value='Very discontent')
-
 
 mood_PH_NL = st.select_slider(' ',
     ['Very bored', 'Bored', 'Somewhat bored', 'Neutral', 'Somewhat excited', 'Excited', 'Very excited'],
@@ -61,8 +60,8 @@ else:
 
 
 if st.button('Submit'):
-    with open('https://github.com/tianyicchenn/Affective_Foretell_self_report_app/blob/master/data.csv', 'a') as file:
+    with open('data.csv', 'a') as file:
         writer = csv.writer(file)
-        writer.writerow([name,moods, sleep_time, food_options, activity_options])
+        writer.writerow([time.ctime(), moods, sleep_time, food_options, activity_options])
     st.write('Thank you for your submission!')
     st.balloons()
