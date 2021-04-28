@@ -72,8 +72,8 @@ else:
 
 
 if st.button('Submit'):
-    #with open('data.csv', 'a') as file:
-        #writer = csv.writer(file)
-        #writer.writerow([name,moods, sleep_time, food_options, activity_options])
+    with open('https://github.com/tianyicchenn/Affective_Foretell_self_report_app/blob/master/data.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow([name,moods, sleep_time, food_options, activity_options])
     st.write('Thank you for your submission!')
     st.balloons()
