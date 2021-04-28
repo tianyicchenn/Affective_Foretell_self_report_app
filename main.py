@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-import csv
+from oocsi import OOCSI
 
 
 def main():
@@ -61,16 +61,24 @@ def main():
         sleep_time = 'sleep_time'
         food_options = 'food_options'
 
-    user_input = [time.ctime(), nickname, moods, sleep_time, food_options, activity_options]
+    def send_data():
+        oocsi.send('Affective_Foretell_Self_Report', {
+            'name': nickname,
+            'mood1': mood_NH_PL,
+            'mood2': mood_PM_NM,
+            'mood3': mood_PH_NL,
+            'sleep': sleep_time,
+            'food': food_options,
+            'activities':activity_options})
 
     if st.button('Submit'):
         if nickname == '--':
             st.write('Please select your nickname.')
         else:
             st.write('Thank you for your submission!')
-            with open('/tmp/data.csv', 'a') as file:
-                writer = csv.writer(file)
-                writer.writerow(user_input)
+            oocsi = OOCSI('Affective_Foretell', 'oocsi.id.tue.nl')
+            oocsi.subscribe('Affective_Foretell_Self_Report', send_data())
+            oocsi.stop()
             st.balloons()
 
 if __name__ == '__main__':
