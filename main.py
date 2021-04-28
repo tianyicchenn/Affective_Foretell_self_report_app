@@ -3,9 +3,6 @@ import time
 
 
 from oocsi import OOCSI
-
-
-
 hours = int(time.strftime('%H'))
 
 # Section 1: Title
@@ -70,7 +67,7 @@ if st.button('Submit'):
         st.write('Please select your nickname.')
     else:
         st.write('Thank you for your submission!')
-        oocsi = OOCSI('Affective Foretell Self-report', 'https://oocsi.id.tue.nl/')
+        oocsi = OOCSI('Affective_Foretell_Self_Report', 'oocsi.id.tue.nl')
         oocsi.send('Affective_Foretell_Self_Report',
                    {'participant': nickname,
                     'time':time.ctime(),
