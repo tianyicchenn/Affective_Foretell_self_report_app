@@ -70,4 +70,4 @@ if st.button('Submit'):
         st.write('Thank you for your submission!')
         st.balloons()
         saved_data.append(user_input)
-        st write(saved_data)
+        st.write(saved_data)
