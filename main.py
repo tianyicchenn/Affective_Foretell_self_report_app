@@ -3,7 +3,7 @@ import time
 import csv
 
 hours = int(time.strftime('%H'))
-
+saved_data = []
 # Section 1: Title
 st.title('Affective Foretell')
 st.subheader('What is your name?')
@@ -58,10 +58,16 @@ else:
     sleep_time = 'sleep_time'
     food_options = 'food_options'
 
+user_input = [time.ctime(), moods, sleep_time, food_options, activity_options]
 
 if st.button('Submit'):
-    with open('data.csv', 'a') as file:
+    '''with open('data.csv', 'a') as file:
         writer = csv.writer(file)
-        writer.writerow([time.ctime(), moods, sleep_time, food_options, activity_options])
-    st.write('Thank you for your submission!')
-    st.balloons()
+        writer.writerow(user_input)'''
+    if name == '--':
+        st.write('Please select your nickname.')
+    else:
+        st.write('Thank you for your submission!')
+        st.balloons()
+        saved_data.append(user_input)
+        st write(saved_data)
