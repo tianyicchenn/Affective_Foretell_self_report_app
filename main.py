@@ -12,7 +12,7 @@ name = st.selectbox(
     ('--', 'Alex', 'Ben', 'Chris', 'Don', 'Eddie', 'Fem', 'Greta',
      'Hans', 'Iris', 'Jon'))
 if name != '--':
-    st.write('Hello', name,'!')
+    st.write('Helloooo', name,'!')
 
 # Section 2: Mood
 st.subheader('How are you feeling right now?')
