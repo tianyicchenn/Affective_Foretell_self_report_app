@@ -76,5 +76,7 @@ if st.button('Submit'):
                     'food': food_options,
                     'activities': activity_options
         })
+        time.sleep(1)
+        oocsi.stop()
         st.balloons()
 
