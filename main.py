@@ -7,30 +7,22 @@ def main():
     hours = int(time.strftime('%H'))
 
     # Section 1: Title
-    st.title('Affective Foretell')
+    st.title('Affective Foreteller')
     st.subheader('What is your name?')
     nickname = st.selectbox(
         'Select your nickname.',
-        ('--', 'Test', 'Alex', 'Ben', 'Chris', 'Don', 'Eddie', 'Fem', 'Greta',
-         'Hans', 'Iris', 'Jon'))
+        ('--', 'Alex', 'Ben', 'Chris', 'Don', 'Eddie', 'Fem', 'Greta',
+         'Hans', 'Iris', 'Jon', 'Kim'))
     if nickname != '--':
         st.write('Hello', nickname, '!')
 
     # Section 2: Mood
     st.subheader('How are you feeling right now?')
-    mood_NH_PL = st.select_slider(' ',
-        ['Very tense', 'Tense', 'Somewhat tense', 'Neutral', 'Somewhat calm', 'Calm', 'Very calm'],
-        value='Very tense')
-
-    mood_PM_NM = st.select_slider(' ',
-        ['Very discontent', 'Discontent', 'Somewhat discontent', 'Neutral', 'Somewhat content', 'Content', 'Very content'],
-        value='Very discontent')
-
-    mood_PH_NL = st.select_slider(' ',
-        ['Very bored', 'Bored', 'Somewhat bored', 'Neutral', 'Somewhat excited', 'Excited', 'Very excited'],
-        value='Very bored')
-
-    moods = [mood_NH_PL, mood_PM_NM, mood_PH_NL]
+    mood_option = st.radio(
+        'Select an option of words that best describe your mood.',
+        ('Excited, elated, ebullient', 'Happy, pleased, content', 'Calm, serene, tranquil',
+         'Tense, nervous, upset', 'Miserable, unhappy, discontent', 'Depressed, bored, lethargic')
+    )
 
     # Section 3: Activities
     if hours in range(6, 12):
@@ -53,17 +45,15 @@ def main():
         st.subheader('What were your activities today?')
         activity_options = st.multiselect(
             'You can select multiple options.',
-            ['⚽ sport️', '🧘️ meditation', '🎼 music', '🎨 hobbies', '🚗 travel', '📱 apps',
-             '🛏 rest', '🛍 shopping', '📚 read', '💻 work', '🍽 meal', '🍻 drinks'])
+            ['⚽ sport️', '🧘️ meditation', '🎼 music', '🎨 hobbies', '🚗 commute', '📱 apps',
+             '🛏 rest', '🛍 shopping', '📚 read', '💻 work', '🍽 meals', '🍻 drinks'])
         sleep_time = 'sleep_time'
         food_options = 'food_options'
 
     def send_data():
         oocsi.send('Affective_Foretell_Self_Report', {
             'name': nickname,
-            'mood1': mood_NH_PL,
-            'mood2': mood_PM_NM,
-            'mood3': mood_PH_NL,
+            'mood': mood_option,
             'sleep': sleep_time,
             'food': food_options,
             'activities':activity_options})
@@ -77,6 +67,7 @@ def main():
             oocsi.subscribe('Affective_Foretell_Self_Report', send_data())
             oocsi.stop()
             st.balloons()
+
 
 if __name__ == '__main__':
     main()
