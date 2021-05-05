@@ -25,7 +25,7 @@ def main():
     )
 
     # Section 3: Activities
-    if hours in range(6, 12):
+    if hours in range(5, 11):
         st.subheader('How many hours did you sleep last night?')
         sleep_time = st.slider(
             label='',
@@ -36,7 +36,7 @@ def main():
         )
         food_options = 'food_options'
         activity_options = 'activity_options'
-    elif hours in range(12, 17):
+    elif hours in range(11, 17):
         st.subheader('What was your last meal?')
         food_options = st.text_input('Type or use emojis to describe what you ate.', value='', max_chars=50)
         sleep_time = 'sleep_time'
