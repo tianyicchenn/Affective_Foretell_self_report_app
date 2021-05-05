@@ -38,7 +38,7 @@ def main():
         activity_options = 'activity_options'
     elif hours in range(12, 17):
         st.subheader('What was your last meal?')
-        food_options = st.text_input('Type or use emojis to describe what you ate.', 50)
+        food_options = st.text_input('Type or use emojis to describe what you ate.', value='', max_chars=50)
         sleep_time = 'sleep_time'
         activity_options = 'activity_options'
     else:
