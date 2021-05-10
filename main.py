@@ -11,8 +11,8 @@ def main():
     st.subheader('What is your name?')
     nickname = st.selectbox(
         'Select your nickname.',
-        ('--', 'Chris', 'Eddie', 'Fem', 'Greta',
-         'Hans', 'Iris', 'Jon', 'Kim'))
+        ('--', 'Chris', 'Hans', 'Iris', 'Jon', 'Kim',
+         'Leo', 'Mark', 'Nora', 'Oz', 'Penny', 'Quinn'))
     if nickname != '--':
         st.write('Hello', nickname, '!')
 
